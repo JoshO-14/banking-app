@@ -6,10 +6,11 @@ account = BankAccount(user_id)
 account.create_account()
 
 while True:
-    print("\nChoose an option:")
+    print("Welcome to Bank of Wickville!")
+    print("\nWhere would you like to navigate? Choose an option:")
     print("1. Check Balance")
-    print("2. Deposit")
-    print("3. Withdraw")
+    print("2. Deposit Wickbucks")
+    print("3. Withdraw Wickbucks")
     print("4. Exit")
 
     choice = input("Enter your choice (1–4): ")
