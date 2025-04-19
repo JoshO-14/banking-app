@@ -4,13 +4,13 @@ from bank_account import BankAccount
 class TestBankAccount(unittest.TestCase):
 
     def setUp(self):
-        self.account = BankAccount("test_user")
+        self.account = BankAccount("test_user", "test_password")
         # Reset account if it already exists
         self.cursor = self.account.conn.cursor()
         self.cursor.execute("DELETE FROM accounts WHERE user_id = ?", ("test_user",))
         self.cursor.execute("DELETE FROM transactions WHERE user_id = ?", ("test_user",))
         self.account.conn.commit()
-        self.account.create_account()
+        self.account.create_account("test_password")
 
     def test_deposit(self):
         self.account.deposit(100)
