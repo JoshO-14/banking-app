@@ -1,7 +1,7 @@
 
 from bank_account import BankAccount
 
-print("Welcome to the Wickbucks Bank!")
+print("Welcome to Joshua's Bank!")
 
 create_account = input("Do you want to create a new account? (yes/no): ").strip().lower()
 if create_account == 'yes':
@@ -37,9 +37,9 @@ account.transaction_table()
 while True:
     
     print("\nWhere would you like to navigate? Choose an option:")
-    print("1. Check Balance")
-    print("2. Deposit Wickbucks")
-    print("3. Withdraw Wickbucks")
+    print("1. Check Account Balance")
+    print("2. Deposit Money")
+    print("3. Withdraw Money")
     print("4. Delete Account")
     print("5. Exit")
 
