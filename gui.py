@@ -56,6 +56,12 @@ def transaction_menu(account):
     balance_button = tk.Button(window, text="View Balance", command=lambda: view_balance(account), font=("Times New Roman", 16))
     balance_button.grid(row=2, columnspan=2, pady=10)
 
+    delete_account_button = tk.Button(window, text="Delete Account", command=lambda: delete_account(account), font=("Times New Roman", 16))
+    delete_account_button.grid(row=3, columnspan=2, pady=10)
+
+    exit_button = tk.Button(window, text="Exit", command=exit_app, font=("Times New Roman", 16))
+    exit_button.grid(row=4, columnspan=2, pady=10)
+
 # Define deposit function
 def deposit(account):
     for widget in window.winfo_children():
@@ -73,6 +79,7 @@ def deposit(account):
     def confirm_deposit():
         amount = float(amount_entry.get())
         account.deposit(amount)
+
         print(f"Deposited {amount} successfully!")
         transaction_menu(account)
 
@@ -95,12 +102,30 @@ def withdraw(account):
 
     def confirm_withdraw():
         amount = float(amount_entry.get())
-        account.withdraw(amount)
-        print(f"Withdrew {amount} successfully!")
-        transaction_menu(account)
+        if amount > account.get_balance():
+            print("Insufficient funds.")
+        else:
+            account.withdraw(amount)
+            print(f"Withdrew {amount} successfully!")
+            transaction_menu(account)
 
     confirm_button = tk.Button(window, text="Confirm", command=confirm_withdraw, font=("Times New Roman", 16))
     confirm_button.grid(row=2, columnspan=2, pady=10)
+
+def delete_account(account):
+    for widget in window.winfo_children():
+        widget.destroy()
+
+    label = tk.Label(window, text="Delete Account", font=("Times New Roman", 22))
+    label.grid(row=0, columnspan=2, pady=20)
+
+    def confirm_delete():
+        account.delete_account()
+        print("Account deleted successfully!")
+        window.destroy()
+
+    confirm_button = tk.Button(window, text="Confirm", command=confirm_delete, font=("Times New Roman", 16))
+    confirm_button.grid(row=1, columnspan=2, pady=10)
 
 # Define view balance function
 def view_balance(account):
@@ -113,6 +138,9 @@ def view_balance(account):
 
     back_button = tk.Button(window, text="Back", command=lambda: transaction_menu(account), font=("Times New Roman", 16))
     back_button.grid(row=1, columnspan=2, pady=10)
+
+def exit_app():
+    window.destroy()
 
 # Define login function
 def login():
